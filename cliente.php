@@ -5,7 +5,7 @@ session_start();
 // Verificar si existe la variable de sesión tipo_user y si es igual a 3
 if (isset($_SESSION['tipo_user']) && $_SESSION['tipo_user'] == 3) {
   // El usuario es un cliente, se puede mostrar el contenido
-  $nombre = $_SESSION['tipo_user'];
+  $tipo_usuario = $_SESSION['tipo_user'];
 
 } else {
   // Si no es un cliente, redirigir a la página de inicio
@@ -16,6 +16,6 @@ if (isset($_SESSION['tipo_user']) && $_SESSION['tipo_user'] == 3) {
 
 <!-- Dentro del formulario puedes imprimir los valores en inputs -->
 
-<input type="text" name="nombre" value="<?php echo $nombre; ?>">
+<input type="hidden" name="nombre" value="<?php echo $tipo_usuario; ?>">
 
 
