@@ -6,7 +6,8 @@ session_start();
 if (isset($_SESSION['tipo_user']) && $_SESSION['tipo_user'] == 0) {
   // El usuario es un administrador, se puede mostrar el contenido
   $tipo_usuario = $_SESSION['tipo_user'];
-  echo "Bienvenido, Redactor";
+  
+  echo "Bienvenido, Adminstrador";
 } else {
   // Si no es un administrador, redirigir a la página de inicio
   header("Location: login/index.php");
@@ -14,3 +15,14 @@ if (isset($_SESSION['tipo_user']) && $_SESSION['tipo_user'] == 0) {
 }
 ?>
 <input type="hidden" name="nombre" value="<?php echo $tipo_usuario; ?>">
+
+<?php
+include_once './includes/superior.php';
+?>
+<!-- Insertar codigo al Body -->
+
+
+<!-- FIN codigo BODY -->
+<?php
+include_once "./includes/inferior.php";
+?>
