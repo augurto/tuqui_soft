@@ -116,27 +116,27 @@ include_once './includes/superior.php';
                               </div>
                           </div>
                           <small>
-                              57% Complete
+                              57% Completado
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success">Success</span>
+                          <span class="badge badge-Pendiente">Pendiente</span>
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
                               <i class="fas fa-folder">
                               </i>
-                              View
+                              Ver
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              Editar
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              Eliminar
                           </a>
                       </td>
                   </tr>
@@ -169,27 +169,27 @@ include_once './includes/superior.php';
                               </div>
                           </div>
                           <small>
-                              47% Complete
+                              47% Completado
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success">Success</span>
+                          <span class="badge badge-Pendiente">Pendiente</span>
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
                               <i class="fas fa-folder">
                               </i>
-                              View
+                              Ver
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              Editar
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              Eliminar
                           </a>
                       </td>
                   </tr>
@@ -225,27 +225,27 @@ include_once './includes/superior.php';
                               </div>
                           </div>
                           <small>
-                              77% Complete
+                              77% Completado
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success">Success</span>
+                          <span class="badge badge-Pendiente">Pendiente</span>
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
                               <i class="fas fa-folder">
                               </i>
-                              View
+                              Ver
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              Editar
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              Eliminar
                           </a>
                       </td>
                   </tr>
@@ -284,27 +284,27 @@ include_once './includes/superior.php';
                               </div>
                           </div>
                           <small>
-                              60% Complete
+                              60% Completado
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success">Success</span>
+                          <span class="badge badge-Pendiente">Pendiente</span>
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
                               <i class="fas fa-folder">
                               </i>
-                              View
+                              Ver
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              Editar
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              Eliminar
                           </a>
                       </td>
                   </tr>
@@ -340,27 +340,27 @@ include_once './includes/superior.php';
                               </div>
                           </div>
                           <small>
-                              12% Complete
+                              12% Completado
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success">Success</span>
+                          <span class="badge badge-Pendiente">Pendiente</span>
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
                               <i class="fas fa-folder">
                               </i>
-                              View
+                              Ver
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              Editar
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              Eliminar
                           </a>
                       </td>
                   </tr>
@@ -399,27 +399,27 @@ include_once './includes/superior.php';
                               </div>
                           </div>
                           <small>
-                              35% Complete
+                              35% Completado
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success">Success</span>
+                          <span class="badge badge-Pendiente">Pendiente</span>
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
                               <i class="fas fa-folder">
                               </i>
-                              View
+                              Ver
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              Editar
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              Eliminar
                           </a>
                       </td>
                   </tr>
@@ -452,27 +452,27 @@ include_once './includes/superior.php';
                               </div>
                           </div>
                           <small>
-                              87% Complete
+                              87% Completado
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success">Success</span>
+                          <span class="badge badge-Pendiente">Pendiente</span>
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
                               <i class="fas fa-folder">
                               </i>
-                              View
+                              Ver
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              Editar
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              Eliminar
                           </a>
                       </td>
                   </tr>
@@ -508,27 +508,27 @@ include_once './includes/superior.php';
                               </div>
                           </div>
                           <small>
-                              77% Complete
+                              77% Completado
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success">Success</span>
+                          <span class="badge badge-Pendiente">Pendiente</span>
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
                               <i class="fas fa-folder">
                               </i>
-                              View
+                              Ver
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              Editar
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              Eliminar
                           </a>
                       </td>
                   </tr>
@@ -567,27 +567,27 @@ include_once './includes/superior.php';
                               </div>
                           </div>
                           <small>
-                              77% Complete
+                              77% Completado
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success">Success</span>
+                          <span class="badge badge-Pendiente">Pendiente</span>
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
                               <i class="fas fa-folder">
                               </i>
-                              View
+                              Ver
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              Editar
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              Eliminar
                           </a>
                       </td>
                   </tr>
