@@ -50,8 +50,12 @@ include_once './includes/superior.php';
     </section>
 
     <div class="col-md-6 text-center" <?php if ($tipo_usuario != 0) {echo 'style="display:none;"';} ?>>
-  <button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell"></i> Agregar Proyecto</button>
-</div>
+        <br>
+        <center>
+        <button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell"></i> Agregar Proyecto</button>
+        </center>
+        <br>
+    </div>
 
     <!-- Main content -->
     <section class="content">
