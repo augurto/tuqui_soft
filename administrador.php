@@ -41,6 +41,7 @@ mysqli_close($conn);
 <?php
 include_once './includes/superior.php';
 ?>
+
 <!-- Insertar codigo al Body -->
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
