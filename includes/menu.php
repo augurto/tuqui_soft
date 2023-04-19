@@ -41,7 +41,7 @@
           <li class="nav-header">Rol Adminstrador</li>
           
           <li class="nav-item">
-            <a href="proyectos/index.php" class="nav-link">
+            <a href="proyectos.php" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Proyectos</p>
             </a>
