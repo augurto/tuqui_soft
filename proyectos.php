@@ -64,6 +64,7 @@ include_once './includes/superior.php';
         <button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell"></i> Otro Boton</button>
     </div>
     </div>
+    <br>
     <?php
     }
     ?>
