@@ -16,6 +16,28 @@ if (isset($_SESSION['tipo_user']) && $_SESSION['tipo_user'] == 0) {
 ?>
 <input type="hidden" name="nombre" value="<?php echo $tipo_usuario; ?>">
 
+<!-- CODIGO CABECERA -->
+<?php
+// Incluir archivo de conexión a la base de datos
+include 'includes/conexion.php';
+
+// Consulta para contar la cantidad de clientes con rol 3
+$sql = "SELECT COUNT(*) as cantidad FROM usuarios WHERE rol = 3";
+$resultado = mysqli_query($conn, $sql);
+
+if ($resultado) {
+  // Obtener la cantidad de clientes
+  $fila = mysqli_fetch_assoc($resultado);
+  $cantidadClientes = $fila['cantidad'];
+} else {
+  $cantidadClientes = 0;
+}
+
+mysqli_close($conn);
+?>
+<!-- FIN CODIGO CABECERA -->
+
+
 <?php
 include_once './includes/superior.php';
 ?>
@@ -73,8 +95,8 @@ include_once './includes/superior.php';
               <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">New Members</span>
-                <span class="info-box-number">2,000</span>
+                <span class="info-box-text">Clientes</span>
+                <span class="info-box-number"><?php echo $cantidadClientes; ?> </span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -83,7 +105,7 @@ include_once './includes/superior.php';
           <!-- /.col -->
         </div>
         <!-- /.row -->
-        
+
 <!-- FIN codigo BODY -->
 <?php
 include_once "./includes/inferior.php";
