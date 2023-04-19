@@ -4,16 +4,25 @@
 session_start();
 
 // Verificar si existe la variable de sesión tipo_user y si es igual a 0
-if (isset($_SESSION['tipo_user']) && $_SESSION['tipo_user'] == 0) {
-  // El usuario es un administrador, se puede mostrar el contenido
-  $tipo_usuario = $_SESSION['tipo_user'];
+if (isset($_SESSION['tipo_user']) && ($_SESSION['tipo_user'] == 0 || $_SESSION['tipo_user'] == 1 || $_SESSION['tipo_user'] == 2 || $_SESSION['tipo_user'] == 3)) {
+    // El usuario es un administrador, coordinador, redactor o cliente, se puede mostrar el contenido
+    $tipo_usuario = $_SESSION['tipo_user'];
+    
+    if ($tipo_usuario == 0) {
+      echo "Bienvenido, Administrador";
+    } elseif ($tipo_usuario == 1) {
+      echo "Bienvenido, Coordinador";
+    } elseif ($tipo_usuario == 2) {
+      echo "Bienvenido, Redactor";
+    } elseif ($tipo_usuario == 3) {
+      echo "Bienvenido, Cliente";
+    }
+  } else {
+    // Si no es un administrador, coordinador, redactor o cliente, redirigir a la página de inicio
+    header("Location: login/index.php");
+    exit();
+  }
   
-  echo "Bienvenido, Adminstrador";
-} else {
-  // Si no es un administrador, redirigir a la página de inicio
-  header("Location: login/index.php");
-  exit();
-}
 ?>
 <input type="hidden" name="nombre" value="<?php echo $tipo_usuario; ?>">
 <?php
@@ -39,9 +48,11 @@ include_once './includes/superior.php';
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    <div class="col-md-6">
-        <button type="button" class="btn btn-outline-primary btn-block"><i class="fa fa-bell"></i> Agregar Proyecto</button>
-    </div>
+
+    <div class="col-md-6 text-center" <?php if ($tipo_usuario != 0) {echo 'style="display:none;"';} ?>>
+  <button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell"></i> Agregar Proyecto</button>
+</div>
+
     <!-- Main content -->
     <section class="content">
 
