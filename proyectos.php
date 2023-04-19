@@ -32,14 +32,16 @@ include_once './includes/superior.php';
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">../</a></li>
+              <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
               <li class="breadcrumb-item active">Proyectos</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+    <div class="col-md-6">
+        <button type="button" class="btn btn-outline-primary btn-block"><i class="fa fa-bell"></i> Agregar Proyecto</button>
+    </div>
     <!-- Main content -->
     <section class="content">
 
