@@ -24,7 +24,7 @@ if (isset($_SESSION['tipo_user']) && ($_SESSION['tipo_user'] == 0 || $_SESSION['
   }
   
 ?>
-<input type="hidden" name="nombre" value="<?php echo $tipo_usuario; ?>">
+<input type="text" name="nombre" value="<?php echo $tipo_usuario; ?>">
 <?php
 include_once './includes/superior.php';
 ?>
