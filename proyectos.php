@@ -48,28 +48,24 @@ include_once './includes/superior.php';
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    <div class="col-md-4 text-center" <?php if ($tipo_usuario != 0) {echo 'style="display:none;"';} ?>>
-       
-        
+    <?php
+    if (isset($_SESSION['tipo_user']) && $_SESSION['tipo_user'] == 0) {
+    $tipo_usuario = $_SESSION['tipo_user'];
+    ?>
+    <div class="row">
+    <div class="col-md-4 text-center">
         <button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell"></i> Otro Boton</button>
-        
-        
     </div>
-
-    <div class="col-md-4 text-center" <?php if ($tipo_usuario != 0) {echo 'style="display:none;"';} ?>>
-        
-        
+    <div class="col-md-4 text-center">
         <button type="button" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Agregar Proyecto</button>
-        
-        
     </div>
-    <div class="col-md-4 text-center" <?php if ($tipo_usuario != 0) {echo 'style="display:none;"';} ?>>
-        
-        
+    <div class="col-md-4 text-center">
         <button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell"></i> Otro Boton</button>
-        
-        
     </div>
+    </div>
+    <?php
+    }
+    ?>
 
 
     <!-- Main content -->
