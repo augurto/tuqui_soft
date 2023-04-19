@@ -3,8 +3,8 @@
 <?php
 session_start();
 
-// Verificar si existe la variable de sesión tipo_user y si es igual a 0
-if (isset($_SESSION['tipo_user']) && ($_SESSION['tipo_user'] == 0 || $_SESSION['tipo_user'] == 1 || $_SESSION['tipo_user'] == 2 || $_SESSION['tipo_user'] == 3)) {
+// Verificar si existe la variable de sesión tipo_user y si es igual a 0, 1, 2 o 3
+if (isset($_SESSION['tipo_user']) && in_array($_SESSION['tipo_user'], array(0, 1, 2, 3))) {
     // El usuario es un administrador, coordinador, redactor o cliente, se puede mostrar el contenido
     $tipo_usuario = $_SESSION['tipo_user'];
     
@@ -17,11 +17,12 @@ if (isset($_SESSION['tipo_user']) && ($_SESSION['tipo_user'] == 0 || $_SESSION['
     } elseif ($tipo_usuario == 3) {
       echo "Bienvenido, Cliente";
     }
-  } else {
+} else {
     // Si no es un administrador, coordinador, redactor o cliente, redirigir a la página de inicio
-    header("Location: login/index.php");
+    header("Location: index.php");
     exit();
-  }
+}
+
   
 ?>
 <input type="text" name="nombre" value="<?php echo $tipo_usuario; ?>">
