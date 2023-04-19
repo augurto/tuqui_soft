@@ -46,7 +46,7 @@ include_once './includes/superior.php';
 <div class="row">
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fa-duotone fa-rectangle-history-circle-plus"></i></span>
+              <span class="info-box-icon bg-info elevation-1"><i class="fa-regular fa-file"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Proyectos</span>
@@ -65,8 +65,8 @@ include_once './includes/superior.php';
               <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-text">Finalizados</span>
+                <span class="info-box-number">8</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -82,7 +82,7 @@ include_once './includes/superior.php';
               <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
+                <span class="info-box-text">Contabilidad</span>
                 <span class="info-box-number">760</span>
               </div>
               <!-- /.info-box-content -->
