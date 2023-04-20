@@ -169,7 +169,7 @@
         const idCliente = $('select').val();
         const inicioFinEntrega = $('input[type=text].float-right').val();
         const monto = $('input[type=text].form-control:last').val();
-        console.log("XD");
+        console.log('XD');
         // Obtener detalles del proyecto de la tabla "detalle_proyecto"
         const detallesProyecto = [];
         $('#tabla-detalles-proyecto tbody tr').each(function() {
@@ -184,7 +184,8 @@
         // Realizar llamada AJAX al archivo PHP
         $.ajax({
         type: 'POST',
-        url: '../insert/guardar_proyecto.php',
+        url: '../includes/insert/guardar_proyecto.php',
+      
         data: {
             nombreProyecto: nombreProyecto,
             idCliente: idCliente,
