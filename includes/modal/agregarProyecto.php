@@ -26,77 +26,34 @@
                 <!-- FIN CLIENTE -->
             
               <!-- ASIGNAR USUARIOS AL PROYECTO -->
-              
-                <div class="form-group">
-                    <label>Asignar coordinador</label>
-                    <div class="select2-purple" style="display: flex;">
-                        <select id="coordinador-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                            <?php
-                                $query = "SELECT id, nombre, rol FROM usuarios WHERE rol != 3";
-                                $result = mysqli_query($conn, $query);
-                                while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
-                                <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
-                            <?php } ?>
-                        </select>
-                        <button id="agregar-coordinador" class="form-control" type="button" style="margin-left: 10px;">Agregar coordinador</button>
-                    </div>
-                </div>
-
-                <table id="coordinadores-table" class="table">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-
-                <script>
-                    $(document).ready(function() {
-                        $('#agregar-coordinador').click(function() {
-                            var id = $('#coordinador-select').val();
-                            var nombre = $('#coordinador-select option:selected').text().split(' - ')[0];
-                            var html = '<tr><td>' + nombre + '</td><td><button type="button" class="btn btn-danger btn-sm eliminar-coordinador">Eliminar</button></td></tr>';
-                            $('#coordinadores-table tbody').append(html);
-                        });
-
-                        $(document).on('click', '.eliminar-coordinador', function() {
-                            $(this).closest('tr').remove();
-                        });
-                    });
-                </script>
-
-                <div class="form-group">
-                    <label>Asignar redactor</label>
-                    <div class="select2-purple" style="display: flex;">
-                        <select id="redactor-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+              <div class="form-group">
+                <label>Asignar asesor</label>
+                <div class="select2-purple" style="display: flex;">
+                    <select id="asesor-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
                         <?php
                             $query = "SELECT id, nombre, rol FROM usuarios WHERE rol != 3";
                             $result = mysqli_query($conn, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
-                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
                         <?php } ?>
-                        </select>
-                        <button id="agregar-redactor"  class="form-control"  type="button" style="margin-left: 10px;">Agregar redactor</button>
-                    </div>
+                    </select>
+                    <button id="agregar-asesor" class="form-control" type="button" style="margin-left: 10px;">Agregar asesor</button>
                 </div>
+            </div>
 
-
-                <table class="table table-striped table-bordered" id="tabla-usuarios">
+            <table id="tabla-asesores" class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                    <th>Nombre</th>
-                    <th>Acción</th>
+                        <th>Nombre</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
-                </table>
+            </table>
 
-
+                
               
               <!-- FIN USUARIOS AL PROYECTO -->
 
@@ -135,4 +92,35 @@
       <!-- /.modal -->
 
       <!-- INICIO DE SCRIPT -->
-   
+   <script>
+    // Seleccionamos el botón y el select
+    const agregarAsesorBtn = document.getElementById('agregar-asesor');
+    const asesorSelect = document.getElementById('asesor-select');
+
+    // Seleccionamos la tabla donde vamos a agregar los asesores
+    const tablaAsesores = document.getElementById('tabla-asesores');
+
+    // Agregamos un listener al botón
+    agregarAsesorBtn.addEventListener('click', function() {
+    // Obtenemos el valor del select
+    const asesorId = asesorSelect.value;
+    const asesorNombre = asesorSelect.options[asesorSelect.selectedIndex].text;
+
+    // Creamos una nueva fila en la tabla con el nombre del asesor y un botón para eliminarlo
+    const nuevaFila = document.createElement('tr');
+    nuevaFila.innerHTML = `
+        <td>${asesorNombre}</td>
+        <td><button class="btn btn-danger btn-sm eliminar-asesor">Eliminar</button></td>
+    `;
+
+    // Agregamos la nueva fila a la tabla
+    tablaAsesores.querySelector('tbody').appendChild(nuevaFila);
+
+    // Agregamos un listener al botón de eliminar para eliminar la fila correspondiente
+    const eliminarAsesorBtn = nuevaFila.querySelector('.eliminar-asesor');
+    eliminarAsesorBtn.addEventListener('click', function() {
+        nuevaFila.remove();
+    });
+    });
+
+   </script>
