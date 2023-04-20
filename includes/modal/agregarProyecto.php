@@ -18,19 +18,45 @@
                 <!-- SELECCIONAR CLIENTE  -->
                 <div class="form-group">
                 <label>Cliente</label>
-                <select class="form-control select2" style="width: 100%;">
+                <select class="form-control select2" id="nombre_cliente" style="width: 100%;">
                     <?php while ($fila = mysqli_fetch_array($resultado)) { ?>
                     <option value="<?php echo $fila['id']; ?>"><?php echo $fila['nombre']; ?></option>
                     <?php } ?>
                 </select>
                 </div>
                 <!-- FIN CLIENTE -->
+                <!-- Campo para seleccionar la universidad -->
+               
+                <div class="form-group">
+                    <label>Universidad</label>
+                    <select class="form-control select2" id="nombre_universidad" style="width: 100%;">
+                        <?php
+                         // consulta a la tabla universidad
+                            $consulta_universidades = "SELECT id, CONCAT(abreviatura, ' - ', departamento, ' - ', nombre) as nombre FROM universidad";
+                            $resultado_universidades = mysqli_query($conexion, $consulta_universidades);
+
+                        while ($fila = mysqli_fetch_array($resultado_universidades)) { ?>
+                            <option value="<?php echo $fila['id']; ?>"><?php echo $fila['nombre']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+
+                <!-- Campo para seleccionar el tipo de proyecto -->
+                <div class="form-group">
+                    <label>Tipo de proyecto</label>
+                    <select class="form-control select2" id="tipo_proyecto" style="width: 100%;">
+                        <?php while ($fila = mysqli_fetch_array($resultado_tipos_proyectos)) { ?>
+                            <option value="<?php echo $fila['id']; ?>"><?php echo $fila['nombre']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+
             
               <!-- ASIGNAR USUARIOS AL PROYECTO -->
                 <div class="form-group">
                     <label>Asignar asesor</label>
                     <div class="select2-purple" style="display: flex;">
-                        <select id="asesor-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                        <select id="asesor-select" class="select2" data-placeholder="Asignar Usuario" data-dropdown-css-class="select2-purple" style="width: 100%;">
                             <?php
                                 $query = "SELECT id, nombre, rol FROM usuarios WHERE rol != 3";
                                 $result = mysqli_query($conn, $query);
@@ -80,7 +106,7 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                     </div>
-                    <input type="text" class="form-control">
+                    <input type="text" id="monto" class="form-control">
                 </div>
                 </div>
                 <!-- FIN MONTO -->
@@ -144,7 +170,7 @@
                     <td>${asesorNombre}</td>
                     <td>${rol}</td>
                     <td><button class="btn btn-danger btn-sm eliminar-asesor">Eliminar</button></td>
-                    <input type="hidden" class="asesor-id" value="${asesorId}">
+                    <input type="hidden" id="asesor_id" class="asesor-id" value="${asesorId}">
                 `;
 
                 // Agregamos la nueva fila a la tabla
