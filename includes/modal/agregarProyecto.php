@@ -184,7 +184,7 @@
         // Realizar llamada AJAX al archivo PHP
         $.ajax({
         type: 'POST',
-        url: '../includes/insert/guardar_proyecto.php',
+        url: '../includes/insert/agregarProyecto.php',
       
         data: {
             nombreProyecto: nombreProyecto,
