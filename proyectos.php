@@ -27,7 +27,7 @@ if (isset($_SESSION['tipo_user']) && in_array($_SESSION['tipo_user'], array(0, 1
 ?>
 <!-- Consultar usuarios con rol = 3 -->
 <?php
-require_once 'includes/conexion.php';
+require_once './includes/conexion.php';
 
 $sql = "SELECT id, nombre FROM usuarios WHERE rol = 3";
 $resultado = mysqli_query($conexion, $sql);

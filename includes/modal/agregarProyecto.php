@@ -30,7 +30,7 @@
                 <div class="form-group">
                   <label>Asignar usuarios</label>
                   <div class="select2-purple">
-                    <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                  <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
                       <option>Alabama</option>
                       <option>Alaska</option>
                       <option>California</option>
