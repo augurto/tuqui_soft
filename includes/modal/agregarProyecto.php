@@ -191,7 +191,7 @@
     </script>
 
     <!-- GUARDAR EN LA BD -->
-
+    
     <script>
     function guardarProyecto() {
         $(document).ready(function() {
