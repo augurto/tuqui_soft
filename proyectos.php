@@ -69,6 +69,7 @@ include_once './includes/superior.php';
     }
     ?>
 
+    <?php include './includes/modal/agregarProyecto.php'; ?>
 
     <!-- Main content -->
     <section class="content">
