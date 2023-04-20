@@ -28,15 +28,15 @@
                 <!-- Campo para seleccionar la universidad -->
                
                 <div class="form-group">
-                    <label>Universidad</label>
-                    <select class="form-control select2" id="nombre_universidad" style="width: 100%;">
+                    <label>Tipo de Proyecto</label>
+                    <select class="form-control select2" id="tipo_proyecto" style="width: 100%;">
                         <?php
-                         // consulta a la tabla universidad
-                            $consulta_universidades = "SELECT * FROM universidades";
-                            $resultado_universidades = mysqli_query($conn, $consulta_universidades);
+                        // consulta a la tabla tipo_proyecto
+                        $consulta_tipo_proyecto = "SELECT * FROM tipo_proyecto";
+                        $resultado_tipo_proyecto = mysqli_query($conn, $consulta_tipo_proyecto);
 
-                        while ($fila = mysqli_fetch_array($resultado_universidades)) { ?>
-                            <option value="<?php echo $fila['id']; ?>"><?php echo $fila['departamento'].' - '.$fila['abreviatura'].' - '.$fila['nombre']; ?></option>
+                        while ($fila = mysqli_fetch_array($resultado_tipo_proyecto)) { ?>
+                            <option value="<?php echo $fila['id']; ?>"><?php echo $fila['nombre']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
