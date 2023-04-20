@@ -27,20 +27,37 @@
             
               <!-- ASIGNAR USUARIOS AL PROYECTO -->
               
-                <div class="form-group">
-                  <label>Asignar usuarios</label>
-                  <div class="select2-purple">
-                  <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                      <option>Alabama</option>
-                      <option>Alaska</option>
-                      <option>California</option>
-                      <option>Delaware</option>
-                      <option>Tennessee</option>
-                      <option>Texas</option>
-                      <option>Washington</option>
+              <div class="form-group">
+                <label>Asignar coordinador</label>
+                <div class="select2-purple">
+                    <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                        <?php
+                            $query = "SELECT id, nombre, rol FROM usuarios WHERE rol = 1 OR rol = 2";
+                            $result = mysqli_query($conn, $query);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
+                        <?php } ?>
                     </select>
-                  </div>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>Asignar redactor</label>
+                <div class="select2-purple">
+                    <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                        <?php
+                            $query = "SELECT id, nombre, rol FROM usuarios WHERE rol = 2 OR rol = 0";
+                            $result = mysqli_query($conn, $query);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+
+
                 <!-- /.form-group -->
               
               <!-- FIN USUARIOS AL PROYECTO -->
@@ -78,3 +95,40 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+
+      <!-- INICIO DE SCRIPT -->
+      <script>
+            var usuariosAsignados = []; // Registro de usuarios asignados
+            var coordinadorSelect = document.getElementById("coordinador-select");
+            var redactorSelect = document.getElementById("redactor-select");
+            var agregarCoordinadorBtn = document.getElementById("agregar-coordinador");
+            var agregarRedactorBtn = document.getElementById("agregar-redactor");
+
+            agregarCoordinadorBtn.onclick = function() {
+                agregarUsuario("coordinador-select");
+            };
+
+            agregarRedactorBtn.onclick = function() {
+                agregarUsuario("redactor-select");
+            };
+
+            function agregarUsuario(selectId) {
+                var select = document.getElementById(selectId);
+                var usuarioSeleccionado = select.options[select.selectedIndex].value;
+
+                // Verificar si el usuario ya ha sido asignado como coordinador o redactor
+                if (usuariosAsignados.includes(usuarioSeleccionado)) {
+                    alert("Este usuario ya ha sido asignado como coordinador o redactor.");
+                    return;
+                }
+
+                // Agregar el usuario seleccionado a la lista correspondiente
+                var option = document.createElement("option");
+                option.value = usuarioSeleccionado;
+                option.text = usuarioSeleccionado;
+                select.add(option);
+
+                // Agregar el usuario seleccionado al registro de usuarios asignados
+                usuariosAsignados.push(usuarioSeleccionado);
+            }
+        </script>

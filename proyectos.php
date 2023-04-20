@@ -31,6 +31,8 @@ require_once './includes/conexion.php';
 
 $sql = "SELECT id, nombre FROM usuarios WHERE rol = 3";
 $resultado = mysqli_query($conn, $sql);
+
+
 ?>
 <input type="text" name="nombre" value="<?php echo $tipo_usuario; ?>">
 <?php
