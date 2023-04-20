@@ -58,7 +58,7 @@ include_once './includes/superior.php';
         <button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell"></i> Otro Boton</button>
     </div>
     <div class="col-md-4 text-center">
-        <button type="button" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Agregar Proyecto</button>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-agregar-proyecto"><i class="fa fa-plus" ></i> Agregar Proyecto</button>
     </div>
     <div class="col-md-4 text-center">
         <button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell"></i> Otro Boton</button>
