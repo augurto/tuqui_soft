@@ -86,7 +86,8 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary">Guardar</button>
+              <button type="button" class="btn btn-primary" onclick="guardarProyecto()">Guardar</button>
+
             </div>
           </div>
           <!-- /.modal-content -->
@@ -150,4 +151,50 @@
                 });
             }
         });
+    </script>
+
+    <!-- GUARDAR EN LA BD -->
+
+    <script>
+        $(document).ready(function() {
+        // Agregar evento de clic al botón "Guardar"
+        $('#guardar-proyecto').on('click', function() {
+            // Obtener valores de los campos del formulario
+            const nombreProyecto = $('input[type=text]').val();
+            const idCliente = $('select').val();
+            const inicioFinEntrega = $('input[type=text].float-right').val();
+            const monto = $('input[type=text].form-control:last').val();
+
+            // Obtener detalles del proyecto de la tabla "detalle_proyecto"
+            const detallesProyecto = [];
+            $('#tabla-detalles-proyecto tbody tr').each(function() {
+            const fila = $(this);
+            const detalle = {
+                texto: fila.find('.detalle-proyecto-texto').text(),
+                monto: fila.find('.detalle-proyecto-monto').text()
+            };
+            detallesProyecto.push(detalle);
+            });
+
+            // Realizar llamada AJAX al archivo PHP
+            $.ajax({
+            type: 'POST',
+            url: '../insert/guardar_proyecto.php',
+            data: {
+                nombreProyecto: nombreProyecto,
+                idCliente: idCliente,
+                inicioFinEntrega: inicioFinEntrega,
+                monto: monto,
+                detallesProyecto: JSON.stringify(detallesProyecto)
+            },
+            success: function(data) {
+                alert('El proyecto se ha guardado correctamente');
+            },
+            error: function() {
+                alert('Ha ocurrido un error al guardar el proyecto');
+            }
+            });
+        });
+        });
+
     </script>
