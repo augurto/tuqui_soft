@@ -27,21 +27,46 @@
             
               <!-- ASIGNAR USUARIOS AL PROYECTO -->
               
-              <div class="form-group">
+                <div class="form-group">
                     <label>Asignar coordinador</label>
                     <div class="select2-purple" style="display: flex;">
                         <select id="coordinador-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                        <?php
-                            $query = "SELECT id, nombre, rol FROM usuarios WHERE rol != 3";
-                            $result = mysqli_query($conn, $query);
-                            while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
-                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
-                        <?php } ?>
+                            <?php
+                                $query = "SELECT id, nombre, rol FROM usuarios WHERE rol != 3";
+                                $result = mysqli_query($conn, $query);
+                                while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
+                            <?php } ?>
                         </select>
-                        <button id="agregar-coordinador"  class="form-control" type="button" style="margin-left: 10px;">Agregar coordinador</button>
+                        <button id="agregar-coordinador" class="form-control" type="button" style="margin-left: 10px;">Agregar coordinador</button>
                     </div>
                 </div>
+
+                <table id="coordinadores-table" class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <script>
+                    $(document).ready(function() {
+                        $('#agregar-coordinador').click(function() {
+                            var id = $('#coordinador-select').val();
+                            var nombre = $('#coordinador-select option:selected').text().split(' - ')[0];
+                            var html = '<tr><td>' + nombre + '</td><td><button type="button" class="btn btn-danger btn-sm eliminar-coordinador">Eliminar</button></td></tr>';
+                            $('#coordinadores-table tbody').append(html);
+                        });
+
+                        $(document).on('click', '.eliminar-coordinador', function() {
+                            $(this).closest('tr').remove();
+                        });
+                    });
+                </script>
 
                 <div class="form-group">
                     <label>Asignar redactor</label>
@@ -110,50 +135,4 @@
       <!-- /.modal -->
 
       <!-- INICIO DE SCRIPT -->
-        <script>
-            $(document).ready(function() {
-                // Arreglo para almacenar los usuarios asignados
-                var usuariosAsignados = [];
-
-                // Manejar el evento del botón "Agregar coordinador"
-                $('#agregar-coordinador').click(function() {
-                // Obtener el valor seleccionado en el select de coordinador
-                var usuarioId = $('#coordinador-select').val();
-
-                // Obtener el texto del option seleccionado
-                var usuarioNombre = $('#coordinador-select option:selected').text();
-
-                // Verificar que el usuario no haya sido asignado anteriormente
-                var encontrado = false;
-                for (var i = 0; i < usuariosAsignados.length; i++) {
-                    if (usuariosAsignados[i].id == usuarioId) {
-                    encontrado = true;
-                    break;
-                    }
-                }
-
-                // Si el usuario no ha sido asignado anteriormente, agregarlo a la tabla
-                if (!encontrado) {
-                    usuariosAsignados.push({
-                    id: usuarioId,
-                    nombre: usuarioNombre
-                    });
-
-                    var nuevaFila = '<tr><td>' + usuarioNombre + '</td><td><button type="button" class="btn btn-sm btn-danger btn-eliminar-usuario"><i class="fas fa-trash-alt"></i></button></td></tr>';
-
-                    $('#tabla-usuarios tbody').append(nuevaFila);
-                }
-                });
-
-                // Manejar el evento de eliminar un usuario
-                $(document).on('click', '.btn-eliminar-usuario', function() {
-                var rowIndex = $(this).closest('tr').index();
-
-                usuariosAsignados.splice(rowIndex, 1);
-
-                $(this).closest('tr').remove();
-                });
-            });
-        </script>
-
-
+   
