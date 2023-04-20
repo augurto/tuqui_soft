@@ -39,7 +39,7 @@
                             <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
                         <?php } ?>
                         </select>
-                        <button id="agregar-coordinador" type="button" style="margin-left: 10px;">Agregar coordinador</button>
+                        <button id="agregar-coordinador"  class="form-control" type="button" style="margin-left: 10px;">Agregar coordinador</button>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                             <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
                         <?php } ?>
                         </select>
-                        <button id="agregar-redactor" type="button" style="margin-left: 10px;">Agregar redactor</button>
+                        <button id="agregar-redactor"  class="form-control"  type="button" style="margin-left: 10px;">Agregar redactor</button>
                     </div>
                 </div>
 
@@ -100,56 +100,68 @@
 
       <!-- INICIO DE SCRIPT -->
     <script>
-        $(document).ready(function() {
+        // inicializar arrays para guardar los valores de los select
+        let coordinadores = [];
+        let redactores = [];
 
-            // Agregar coordinador
-            $("#agregar-coordinador").click(function() {
-                var coordinadorId = $("#coordinador-select").val();
-                var coordinadorNombre = $("#coordinador-select option:selected").text();
+        // obtener elementos del DOM
+        const selectCoordinador = document.getElementById("coordinador-select");
+        const selectRedactor = document.getElementById("redactor-select");
+        const btnAgregarCoordinador = document.getElementById("agregar-coordinador");
+        const btnAgregarRedactor = document.getElementById("agregar-redactor");
 
-                // Verificar si ya se ha agregado este coordinador
-                if ($("#coordinadores-table tbody tr[data-id='" + coordinadorId + "']").length > 0) {
-                    alert("Este coordinador ya ha sido agregado");
-                    return;
-                }
+        // función para agregar valor al array y actualizar el select
+        function agregarValor(select, array) {
+        const valor = select.value;
+        if (valor !== "") {
+            array.push(valor);
+            select.value = "";
+            actualizarSelect(select, array);
+        }
+        }
 
-                // Agregar el coordinador a la tabla
-                var row = "<tr data-id='" + coordinadorId + "'>";
-                row += "<td>" + coordinadorNombre + "</td>";
-                row += "<td><button type='button' class='btn btn-sm btn-danger eliminar-coordinador'>Eliminar</button></td>";
-                row += "</tr>";
-                $("#coordinadores-table tbody").append(row);
-            });
-
-            // Eliminar coordinador
-            $("#coordinadores-table tbody").on("click", ".eliminar-coordinador", function() {
-                $(this).closest("tr").remove();
-            });
-
-            // Agregar redactor
-            $("#agregar-redactor").click(function() {
-                var redactorId = $("#redactor-select").val();
-                var redactorNombre = $("#redactor-select option:selected").text();
-
-                // Verificar si ya se ha agregado este redactor
-                if ($("#redactores-table tbody tr[data-id='" + redactorId + "']").length > 0) {
-                    alert("Este redactor ya ha sido agregado");
-                    return;
-                }
-
-                // Agregar el redactor a la tabla
-                var row = "<tr data-id='" + redactorId + "'>";
-                row += "<td>" + redactorNombre + "</td>";
-                row += "<td><button type='button' class='btn btn-sm btn-danger eliminar-redactor'>Eliminar</button></td>";
-                row += "</tr>";
-                $("#redactores-table tbody").append(row);
-            });
-
-            // Eliminar redactor
-            $("#redactores-table tbody").on("click", ".eliminar-redactor", function() {
-                $(this).closest("tr").remove();
-            });
-
+        // función para actualizar el contenido del select
+        function actualizarSelect(select, array) {
+        // eliminar todos los options del select
+        select.innerHTML = "";
+        // agregar un option por cada valor en el array
+        array.forEach((valor) => {
+            const option = document.createElement("option");
+            option.value = valor;
+            option.textContent = valor;
+            select.appendChild(option);
         });
+        }
+
+        // evento para agregar coordinador
+        btnAgregarCoordinador.addEventListener("click", () => {
+        agregarValor(selectCoordinador, coordinadores);
+        });
+
+        // evento para agregar redactor
+        btnAgregarRedactor.addEventListener("click", () => {
+        agregarValor(selectRedactor, redactores);
+        });
+
+        // evento para eliminar coordinador
+        selectCoordinador.addEventListener("dblclick", () => {
+        const valor = selectCoordinador.value;
+        const index = coordinadores.indexOf(valor);
+        if (index !== -1) {
+            coordinadores.splice(index, 1);
+            actualizarSelect(selectCoordinador, coordinadores);
+        }
+        });
+
+        // evento para eliminar redactor
+        selectRedactor.addEventListener("dblclick", () => {
+        const valor = selectRedactor.value;
+        const index = redactores.indexOf(valor);
+        if (index !== -1) {
+            redactores.splice(index, 1);
+            actualizarSelect(selectRedactor, redactores);
+        }
+        });
+
     </script>
 
