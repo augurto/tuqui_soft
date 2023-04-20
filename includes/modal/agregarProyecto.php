@@ -60,7 +60,17 @@
                 </div>
 
 
-                <!-- /.form-group -->
+                <table id="tabla">
+                <thead>
+                    <tr>
+                    <th>Nombre</th>
+                    <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                </table>
+
               
               <!-- FIN USUARIOS AL PROYECTO -->
 
@@ -100,67 +110,45 @@
 
       <!-- INICIO DE SCRIPT -->
     <script>
-        // inicializar arrays para guardar los valores de los select
-        let coordinadores = [];
-        let redactores = [];
-
-        // obtener elementos del DOM
-        const selectCoordinador = document.getElementById("coordinador-select");
-        const selectRedactor = document.getElementById("redactor-select");
-        const btnAgregarCoordinador = document.getElementById("agregar-coordinador");
-        const btnAgregarRedactor = document.getElementById("agregar-redactor");
-
-        // función para agregar valor al array y actualizar el select
-        function agregarValor(select, array) {
-        const valor = select.value;
-        if (valor !== "") {
-            array.push(valor);
-            select.value = "";
-            actualizarSelect(select, array);
+        $(document).ready(function() {
+        var coordinadores = [];
+        var redactores = [];
+        
+        // Función para agregar elementos a la tabla
+        function agregarElemento(id, nombre, array) {
+            // Verificar si el elemento ya existe en el array
+            if (array.some(item => item.id === id)) {
+            return;
+            }
+            array.push({id: id, nombre: nombre});
+            
+            // Agregar el elemento a la tabla
+            var fila = $('<tr>').append(
+            $('<td>').text(nombre),
+            $('<td>').append(
+                $('<button>').text('Eliminar').click(function() {
+                var index = array.findIndex(item => item.id === id);
+                array.splice(index, 1);
+                fila.remove();
+                })
+            )
+            );
+            $('#tabla').append(fila);
         }
-        }
-
-        // función para actualizar el contenido del select
-        function actualizarSelect(select, array) {
-        // eliminar todos los options del select
-        select.innerHTML = "";
-        // agregar un option por cada valor en el array
-        array.forEach((valor) => {
-            const option = document.createElement("option");
-            option.value = valor;
-            option.textContent = valor;
-            select.appendChild(option);
+        
+        // Agregar coordinador
+        $('#agregar-coordinador').click(function() {
+            var id = $('#coordinador-select').val();
+            var nombre = $('#coordinador-select option:selected').text();
+            agregarElemento(id, nombre, coordinadores);
         });
-        }
-
-        // evento para agregar coordinador
-        btnAgregarCoordinador.addEventListener("click", () => {
-        agregarValor(selectCoordinador, coordinadores);
+        
+        // Agregar redactor
+        $('#agregar-redactor').click(function() {
+            var id = $('#redactor-select').val();
+            var nombre = $('#redactor-select option:selected').text();
+            agregarElemento(id, nombre, redactores);
         });
-
-        // evento para agregar redactor
-        btnAgregarRedactor.addEventListener("click", () => {
-        agregarValor(selectRedactor, redactores);
-        });
-
-        // evento para eliminar coordinador
-        selectCoordinador.addEventListener("dblclick", () => {
-        const valor = selectCoordinador.value;
-        const index = coordinadores.indexOf(valor);
-        if (index !== -1) {
-            coordinadores.splice(index, 1);
-            actualizarSelect(selectCoordinador, coordinadores);
-        }
-        });
-
-        // evento para eliminar redactor
-        selectRedactor.addEventListener("dblclick", () => {
-        const valor = selectRedactor.value;
-        const index = redactores.indexOf(valor);
-        if (index !== -1) {
-            redactores.splice(index, 1);
-            actualizarSelect(selectRedactor, redactores);
-        }
         });
 
     </script>
