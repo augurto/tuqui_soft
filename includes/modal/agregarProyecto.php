@@ -27,35 +27,42 @@
             
               <!-- ASIGNAR USUARIOS AL PROYECTO -->
               
-              <div class="form-group">
-                <label>Asignar coordinador</label>
-                <div class="select2-purple">
-                    <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                        <?php
-                            $query = "SELECT id, nombre, rol FROM usuarios WHERE rol = 1 OR rol = 2";
-                            $result = mysqli_query($conn, $query);
-                            while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
-                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-            </div>
+                <?php
+                    $query = "SELECT id, nombre, rol FROM usuarios WHERE rol !=3";
+                    $result = mysqli_query($conn, $query);
 
-            <div class="form-group">
-                <label>Asignar redactor</label>
-                <div class="select2-purple">
-                    <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                        <?php
-                            $query = "SELECT id, nombre, rol FROM usuarios WHERE rol = 2 OR rol = 0";
-                            $result = mysqli_query($conn, $query);
-                            while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
-                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-            </div>
+                    // variables para almacenar valores seleccionados en cada select
+                    $coordinador_selected = array();
+                    $redactor_selected = array();
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $option = '<option value="' . $row['id'] . '">' . $row['nombre'] . ' - ' . $row['rol'] . '</option>';
+
+                        // agregar opción al select de coordinador si no está en el select de redactor
+                        if (!in_array($row['id'], $redactor_selected)) {
+                            echo '<div class="form-group">';
+                            echo '<label>Asignar coordinador</label>';
+                            echo '<div class="select2-purple">';
+                            echo '<select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;" name="coordinador[]">';
+                            echo $option;
+                            echo '</select>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+
+                        // agregar opción al select de redactor si no está en el select de coordinador
+                        if (!in_array($row['id'], $coordinador_selected)) {
+                            echo '<div class="form-group">';
+                            echo '<label>Asignar redactor</label>';
+                            echo '<div class="select2-purple">';
+                            echo '<select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;" name="redactor[]">';
+                            echo $option;
+                            echo '</select>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                    }
+                ?>
 
 
                 <!-- /.form-group -->
