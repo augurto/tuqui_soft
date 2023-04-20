@@ -33,7 +33,7 @@
                         <?php
                          // consulta a la tabla universidad
                             $consulta_universidades = "SELECT * FROM universidades";
-                            $resultado_universidades = mysqli_query($conexion, $consulta_universidades);
+                            $resultado_universidades = mysqli_query($conn, $consulta_universidades);
 
                         while ($fila = mysqli_fetch_array($resultado_universidades)) { ?>
                             <option value="<?php echo $fila['id']; ?>"><?php echo $fila['departamento'].' - '.$fila['abreviatura'].' - '.$fila['nombre']; ?></option>
