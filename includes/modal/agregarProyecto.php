@@ -184,7 +184,7 @@
         // Realizar llamada AJAX al archivo PHP
         $.ajax({
         type: 'POST',
-        url: '../includes/insert/agregarProyecto.php',
+        url: './includes/insert/agregarProyecto.php',
       
         data: {
             nombreProyecto: nombreProyecto,
@@ -194,7 +194,7 @@
             detallesProyecto: JSON.stringify(detallesProyecto)
         },
         success: function(data) {
-            alert('El proyecto se ha guardado correctamente');
+            
         },
         error: function() {
             alert('Ha ocurrido un error al guardar el proyecto');
