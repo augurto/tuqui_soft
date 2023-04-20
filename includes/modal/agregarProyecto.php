@@ -110,36 +110,34 @@
             // Obtenemos el valor del select
             const asesorId = asesorSelect.value;
             const asesorNombre = asesorSelect.options[asesorSelect.selectedIndex].text;
-            const rol = rolSelect.value;
+            const asesorRol = rolSelect.value;
 
-            // Validamos si el asesor ya está en la tabla
-            const filas = tablaAsesores.querySelectorAll('tr');
-            let asesorRepetido = false;
-            filas.forEach(function(fila) {
-                const idFila = fila.querySelector('.asesor-id');
-                if (idFila && idFila.value === asesorId) {
-                    asesorRepetido = true;
-                }
-            });
+            // Verificamos si el asesor ya fue agregado a la tabla
+            const asesorYaAgregado = Array.from(tablaAsesores.querySelectorAll('tr'))
+                                        .some(fila => fila.querySelector('td:first-child').textContent === asesorNombre);
 
-            // Si el asesor no está en la tabla, creamos una nueva fila
-            if (!asesorRepetido) {
-                const nuevaFila = document.createElement('tr');
-                nuevaFila.innerHTML = `
-                    <td>${asesorNombre}</td>
-                    <td>${rol}</td>
-                    <td><button class="btn btn-danger btn-sm eliminar-asesor">Eliminar</button></td>
-                    <input type="hidden" class="asesor-id" value="${asesorId}">
-                `;
-
-                // Agregamos la nueva fila a la tabla
-                tablaAsesores.querySelector('tbody').appendChild(nuevaFila);
-
-                // Agregamos un listener al botón de eliminar para eliminar la fila correspondiente
-                const eliminarAsesorBtn = nuevaFila.querySelector('.eliminar-asesor');
-                eliminarAsesorBtn.addEventListener('click', function() {
-                    nuevaFila.remove();
-                });
+            // Si el asesor ya fue agregado, mostramos un mensaje y salimos de la función
+            if (asesorYaAgregado) {
+                alert(`El asesor ${asesorNombre} ya fue agregado a la tabla.`);
+                return;
             }
+
+            // Creamos una nueva fila en la tabla con el nombre del asesor, su rol y un botón para eliminarlo
+            const nuevaFila = document.createElement('tr');
+            nuevaFila.innerHTML = `
+                <td>${asesorNombre}</td>
+                <td>${asesorRol}</td>
+                <td><button class="btn btn-danger btn-sm eliminar-asesor">Eliminar</button></td>
+            `;
+
+            // Agregamos la nueva fila a la tabla
+            tablaAsesores.querySelector('tbody').appendChild(nuevaFila);
+
+            // Agregamos un listener al botón de eliminar para eliminar la fila correspondiente
+            const eliminarAsesorBtn = nuevaFila.querySelector('.eliminar-asesor');
+            eliminarAsesorBtn.addEventListener('click', function() {
+                nuevaFila.remove();
+            });
         });
+
     </script>
