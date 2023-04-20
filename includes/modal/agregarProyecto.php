@@ -28,58 +28,36 @@
               <!-- ASIGNAR USUARIOS AL PROYECTO -->
               
               <div class="form-group">
-                <label>Asignar coordinador</label>
-                <div class="select2-purple">
-                    <select id="coordinador-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                    <label>Asignar coordinador</label>
+                    <div class="select2-purple" style="display: flex;">
+                        <select id="coordinador-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
                         <?php
-                        $query = "SELECT id, nombre FROM usuarios WHERE rol != 3";
-                        $result = mysqli_query($conn, $query);
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
-                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
-                            <?php
-                        }
+                            $query = "SELECT id, nombre, rol FROM usuarios WHERE rol != 3";
+                            $result = mysqli_query($conn, $query);
+                            while ($row = mysqli_fetch_assoc($result)) {
                         ?>
-                    </select>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
+                        <?php } ?>
+                        </select>
+                        <button id="agregar-coordinador" type="button" style="margin-left: 10px;">Agregar coordinador</button>
+                    </div>
                 </div>
-                <button id="agregar-coordinador" type="button">Agregar coordinador</button>
-                <table id="coordinadores-table" style="margin-top: 10px;">
-                    <thead>
-                        <tr>
-                            <th>Coordinadores</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
 
-            <div class="form-group">
-                <label>Asignar redactor</label>
-                <div class="select2-purple">
-                    <select id="redactor-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                <div class="form-group">
+                    <label>Asignar redactor</label>
+                    <div class="select2-purple" style="display: flex;">
+                        <select id="redactor-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
                         <?php
-                        $query = "SELECT id, nombre FROM usuarios WHERE rol != 3";
-                        $result = mysqli_query($conn, $query);
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
-                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
-                            <?php
-                        }
+                            $query = "SELECT id, nombre, rol FROM usuarios WHERE rol != 3";
+                            $result = mysqli_query($conn, $query);
+                            while ($row = mysqli_fetch_assoc($result)) {
                         ?>
-                    </select>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
+                        <?php } ?>
+                        </select>
+                        <button id="agregar-redactor" type="button" style="margin-left: 10px;">Agregar redactor</button>
+                    </div>
                 </div>
-                <button id="agregar-redactor" type="button">Agregar redactor</button>
-                <table id="redactores-table" style="margin-top: 10px;">
-                    <thead>
-                        <tr>
-                            <th>Redactores</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
 
 
                 <!-- /.form-group -->
