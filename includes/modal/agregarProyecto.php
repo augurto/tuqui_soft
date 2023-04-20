@@ -27,37 +27,59 @@
             
               <!-- ASIGNAR USUARIOS AL PROYECTO -->
               
-                <div class="form-group">
-                    <label>Asignar coordinador</label>
-                    <div class="select2-purple">
-                        <select id="coordinador-select" class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+              <div class="form-group">
+                <label>Asignar coordinador</label>
+                <div class="select2-purple">
+                    <select id="coordinador-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
                         <?php
-                            $query = "SELECT id, nombre, rol FROM usuarios WHERE rol != 3";
-                            $result = mysqli_query($conn, $query);
-                            while ($row = mysqli_fetch_assoc($result)) {
+                        $query = "SELECT id, nombre FROM usuarios WHERE rol != 3";
+                        $result = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
+                            <?php
+                        }
                         ?>
-                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
-                        <?php } ?>
-                        </select>
-                    </div>
-                    <button id="agregar-coordinador" type="button">Agregar coordinador</button>
+                    </select>
                 </div>
+                <button id="agregar-coordinador" type="button">Agregar coordinador</button>
+                <table id="coordinadores-table" style="margin-top: 10px;">
+                    <thead>
+                        <tr>
+                            <th>Coordinadores</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
 
-                <div class="form-group">
-                    <label>Asignar redactor</label>
-                    <div class="select2-purple">
-                        <select id="redactor-select" class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+            <div class="form-group">
+                <label>Asignar redactor</label>
+                <div class="select2-purple">
+                    <select id="redactor-select" class="select2" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
                         <?php
-                            $query = "SELECT id, nombre, rol FROM usuarios WHERE rol != 3";
-                            $result = mysqli_query($conn, $query);
-                            while ($row = mysqli_fetch_assoc($result)) {
+                        $query = "SELECT id, nombre FROM usuarios WHERE rol != 3";
+                        $result = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
+                            <?php
+                        }
                         ?>
-                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre'] . ' - ' . $row['rol']; ?></option>
-                        <?php } ?>
-                        </select>
-                    </div>
-                    <button id="agregar-redactor" type="button">Agregar redactor</button>
+                    </select>
                 </div>
+                <button id="agregar-redactor" type="button">Agregar redactor</button>
+                <table id="redactores-table" style="margin-top: 10px;">
+                    <thead>
+                        <tr>
+                            <th>Redactores</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
 
 
                 <!-- /.form-group -->
@@ -99,38 +121,57 @@
       <!-- /.modal -->
 
       <!-- INICIO DE SCRIPT -->
-      <script>
-            var usuariosAsignados = []; // Registro de usuarios asignados
-            var coordinadorSelect = document.getElementById("coordinador-select");
-            var redactorSelect = document.getElementById("redactor-select");
-            var agregarCoordinadorBtn = document.getElementById("agregar-coordinador");
-            var agregarRedactorBtn = document.getElementById("agregar-redactor");
+    <script>
+        $(document).ready(function() {
 
-            agregarCoordinadorBtn.onclick = function() {
-                agregarUsuario("coordinador-select");
-            };
+            // Agregar coordinador
+            $("#agregar-coordinador").click(function() {
+                var coordinadorId = $("#coordinador-select").val();
+                var coordinadorNombre = $("#coordinador-select option:selected").text();
 
-            agregarRedactorBtn.onclick = function() {
-                agregarUsuario("redactor-select");
-            };
-
-            function agregarUsuario(selectId) {
-                var select = document.getElementById(selectId);
-                var usuarioSeleccionado = select.options[select.selectedIndex].value;
-
-                // Verificar si el usuario ya ha sido asignado como coordinador o redactor
-                if (usuariosAsignados.includes(usuarioSeleccionado)) {
-                    alert("Este usuario ya ha sido asignado como coordinador o redactor.");
+                // Verificar si ya se ha agregado este coordinador
+                if ($("#coordinadores-table tbody tr[data-id='" + coordinadorId + "']").length > 0) {
+                    alert("Este coordinador ya ha sido agregado");
                     return;
                 }
 
-                // Agregar el usuario seleccionado a la lista correspondiente
-                var option = document.createElement("option");
-                option.value = usuarioSeleccionado;
-                option.text = usuarioSeleccionado;
-                select.add(option);
+                // Agregar el coordinador a la tabla
+                var row = "<tr data-id='" + coordinadorId + "'>";
+                row += "<td>" + coordinadorNombre + "</td>";
+                row += "<td><button type='button' class='btn btn-sm btn-danger eliminar-coordinador'>Eliminar</button></td>";
+                row += "</tr>";
+                $("#coordinadores-table tbody").append(row);
+            });
 
-                // Agregar el usuario seleccionado al registro de usuarios asignados
-                usuariosAsignados.push(usuarioSeleccionado);
-            }
-        </script>
+            // Eliminar coordinador
+            $("#coordinadores-table tbody").on("click", ".eliminar-coordinador", function() {
+                $(this).closest("tr").remove();
+            });
+
+            // Agregar redactor
+            $("#agregar-redactor").click(function() {
+                var redactorId = $("#redactor-select").val();
+                var redactorNombre = $("#redactor-select option:selected").text();
+
+                // Verificar si ya se ha agregado este redactor
+                if ($("#redactores-table tbody tr[data-id='" + redactorId + "']").length > 0) {
+                    alert("Este redactor ya ha sido agregado");
+                    return;
+                }
+
+                // Agregar el redactor a la tabla
+                var row = "<tr data-id='" + redactorId + "'>";
+                row += "<td>" + redactorNombre + "</td>";
+                row += "<td><button type='button' class='btn btn-sm btn-danger eliminar-redactor'>Eliminar</button></td>";
+                row += "</tr>";
+                $("#redactores-table tbody").append(row);
+            });
+
+            // Eliminar redactor
+            $("#redactores-table tbody").on("click", ".eliminar-redactor", function() {
+                $(this).closest("tr").remove();
+            });
+
+        });
+    </script>
+
