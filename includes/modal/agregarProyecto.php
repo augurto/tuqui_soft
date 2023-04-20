@@ -181,6 +181,15 @@
         detallesProyecto.push(detalle);
         });
 
+        const asesoresProyecto = [];
+        $('#tabla-asesores tbody tr').each(function() {
+            const fila = $(this);
+            const asesor = {
+                nombre: fila.find('td:first-child').text(),
+                rol: fila.find('td:nth-child(2)').text()
+            };
+            asesoresProyecto.push(asesor);
+        });
         // Realizar llamada AJAX al archivo PHP
         $.ajax({
         type: 'POST',
