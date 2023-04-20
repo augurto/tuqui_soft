@@ -165,7 +165,8 @@
     <script>
     function guardarProyecto() {
         // Obtener valores de los campos del formulario
-        const nombreProyecto = $('input[type=text]').val();
+        
+        const nombreProyecto = $('input[name="nombre_proyecto"]').val();
         const idCliente = $('select').val();
         const inicioFinEntrega = $('input[type=text].float-right').val();
         const monto = $('input[type=text].form-control:last').val();
