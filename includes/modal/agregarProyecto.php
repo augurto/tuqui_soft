@@ -60,7 +60,7 @@
                 </div>
 
 
-                <table id="tabla">
+                <table class="table table-striped table-bordered" id="tabla-usuarios">
                 <thead>
                     <tr>
                     <th>Nombre</th>
@@ -70,6 +70,7 @@
                 <tbody>
                 </tbody>
                 </table>
+
 
               
               <!-- FIN USUARIOS AL PROYECTO -->
@@ -109,47 +110,50 @@
       <!-- /.modal -->
 
       <!-- INICIO DE SCRIPT -->
-    <script>
-        $(document).ready(function() {
-        var coordinadores = [];
-        var redactores = [];
-        
-        // Función para agregar elementos a la tabla
-        function agregarElemento(id, nombre, array) {
-            // Verificar si el elemento ya existe en el array
-            if (array.some(item => item.id === id)) {
-            return;
-            }
-            array.push({id: id, nombre: nombre});
-            
-            // Agregar el elemento a la tabla
-            var fila = $('<tr>').append(
-            $('<td>').text(nombre),
-            $('<td>').append(
-                $('<button>').text('Eliminar').click(function() {
-                var index = array.findIndex(item => item.id === id);
-                array.splice(index, 1);
-                fila.remove();
-                })
-            )
-            );
-            $('#tabla').append(fila);
-        }
-        
-        // Agregar coordinador
-        $('#agregar-coordinador').click(function() {
-            var id = $('#coordinador-select').val();
-            var nombre = $('#coordinador-select option:selected').text();
-            agregarElemento(id, nombre, coordinadores);
-        });
-        
-        // Agregar redactor
-        $('#agregar-redactor').click(function() {
-            var id = $('#redactor-select').val();
-            var nombre = $('#redactor-select option:selected').text();
-            agregarElemento(id, nombre, redactores);
-        });
-        });
+        <script>
+            $(document).ready(function() {
+                // Arreglo para almacenar los usuarios asignados
+                var usuariosAsignados = [];
 
-    </script>
+                // Manejar el evento del botón "Agregar coordinador"
+                $('#agregar-coordinador').click(function() {
+                // Obtener el valor seleccionado en el select de coordinador
+                var usuarioId = $('#coordinador-select').val();
+
+                // Obtener el texto del option seleccionado
+                var usuarioNombre = $('#coordinador-select option:selected').text();
+
+                // Verificar que el usuario no haya sido asignado anteriormente
+                var encontrado = false;
+                for (var i = 0; i < usuariosAsignados.length; i++) {
+                    if (usuariosAsignados[i].id == usuarioId) {
+                    encontrado = true;
+                    break;
+                    }
+                }
+
+                // Si el usuario no ha sido asignado anteriormente, agregarlo a la tabla
+                if (!encontrado) {
+                    usuariosAsignados.push({
+                    id: usuarioId,
+                    nombre: usuarioNombre
+                    });
+
+                    var nuevaFila = '<tr><td>' + usuarioNombre + '</td><td><button type="button" class="btn btn-sm btn-danger btn-eliminar-usuario"><i class="fas fa-trash-alt"></i></button></td></tr>';
+
+                    $('#tabla-usuarios tbody').append(nuevaFila);
+                }
+                });
+
+                // Manejar el evento de eliminar un usuario
+                $(document).on('click', '.btn-eliminar-usuario', function() {
+                var rowIndex = $(this).closest('tr').index();
+
+                usuariosAsignados.splice(rowIndex, 1);
+
+                $(this).closest('tr').remove();
+                });
+            });
+        </script>
+
 
