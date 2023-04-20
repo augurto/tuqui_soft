@@ -12,10 +12,9 @@
             <div class="modal-body">
                 <!-- NOMBRE DEL PROYECTO -->
                 <div class="form-group">
-                    <label>Nombre del proyecto</label>
-                    <input type="text" class="form-control" placeholder="Ingrese el nombre del proyecto">
+                <label>Nombre del proyecto</label>
+                <input id="nombre-proyecto" type="text" class="form-control" placeholder="Ingrese el nombre del proyecto">
                 </div>
-
                 <!-- SELECCIONAR CLIENTE  -->
                 <div class="form-group">
                 <label>Cliente</label>
@@ -165,8 +164,8 @@
     <script>
     function guardarProyecto() {
         // Obtener valores de los campos del formulario
+        const nombreProyecto = $('#nombre-proyecto').val();
         
-        const nombreProyecto = $('input[name="nombre_proyecto"]').val();
         const idCliente = $('select').val();
         const inicioFinEntrega = $('input[type=text].float-right').val();
         const monto = $('input[type=text].form-control:last').val();
