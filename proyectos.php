@@ -30,7 +30,7 @@ if (isset($_SESSION['tipo_user']) && in_array($_SESSION['tipo_user'], array(0, 1
 require_once './includes/conexion.php';
 
 $sql = "SELECT id, nombre FROM usuarios WHERE rol = 3";
-$resultado = mysqli_query($conexion, $sql);
+$resultado = mysqli_query($conn, $sql);
 ?>
 <input type="text" name="nombre" value="<?php echo $tipo_usuario; ?>">
 <?php

@@ -47,7 +47,7 @@
 
               <!-- FECHA DE ENTREGA -->
                 <div class="form-group">
-                <label>Fecha de entrega</label>
+                <label>Inicio y Fin de entrega</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
