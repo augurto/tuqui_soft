@@ -8,7 +8,6 @@
               </button>
             </div>
 
-            <form id="formulario-proyecto">
             <div class="modal-body">
                 <!-- NOMBRE DEL PROYECTO -->
                 <div class="form-group">
@@ -117,7 +116,7 @@
                 </div>
                 <!-- FIN MONTO -->
             </div>
-            </form>
+     
 
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -195,54 +194,44 @@
 
     <script>
     function guardarProyecto() {
-        // Obtener valores de los campos del formulario
-        const nombreProyecto = $('#nombre-proyecto').val();
-        
-        const idCliente = $('select').val();
-        const inicioFinEntrega = $('input[type=text].float-right').val();
-        const monto = $('input[type=text].form-control:last').val();
-        console.log('XD');
-        // Obtener detalles del proyecto de la tabla "detalle_proyecto"
-        const detallesProyecto = [];
-        $('#tabla-detalles-proyecto tbody tr').each(function() {
-        const fila = $(this);
-        const detalle = {
-            texto: fila.find('.detalle-proyecto-texto').text(),
-            monto: fila.find('.detalle-proyecto-monto').text()
-        };
-        detallesProyecto.push(detalle);
-        });
-
-        const asesoresProyecto = [];
-        $('#tabla-asesores tbody tr').each(function() {
-            const fila = $(this);
-            const asesor = {
-                nombre: fila.find('td:first-child').text(),
-                rol: fila.find('td:nth-child(2)').text()
-            };
-            asesoresProyecto.push(asesor);
-        });
-        // Realizar llamada AJAX al archivo PHP
-        $.ajax({
-        type: 'POST',
-        url: './includes/insert/agregarProyecto.php',
-      
-        data: {
-            nombreProyecto: nombreProyecto,
-            idCliente: idCliente,
-            inicioFinEntrega: inicioFinEntrega,
-            monto: monto,
-            detallesProyecto: JSON.stringify(detallesProyecto)
-        },
-        success: function(data) {
+        $(document).ready(function() {
+        // Cuando se envía el formulario
+        $("#formulario-proyecto").submit(function(event) {
+            // Evita que se envíe el formulario por defecto
+            event.preventDefault();
             
-        },
-        error: function() {
-            alert('Ha ocurrido un error al guardar el proyecto');
-        }
+            // Captura los valores de los campos
+            var nombreProyecto = $("#nombre-proyecto").val();
+            var idCliente = $("#nombre_cliente").val();
+            var idUniversidad = $("#nombre_universidad").val();
+            var idTipoProyecto = $("#tipo_proyecto").val();
+            var fechaEntrega = $("#reservation").val();
+            var monto = $("#monto").val();
+            
+            // Crea un objeto con los valores capturados
+            var proyecto = {
+                nombreProyecto: nombreProyecto,
+                idCliente: idCliente,
+                idUniversidad: idUniversidad,
+                idTipoProyecto: idTipoProyecto,
+                fechaEntrega: fechaEntrega,
+                monto: monto,
+                asesores: []
+            };
+            
+            // Captura los valores de los asesores asignados al proyecto
+            $("#tabla-asesores tbody tr").each(function() {
+                var nombreAsesor = $(this).find("td:nth-child(1)").text();
+                var rol = $(this).find("td:nth-child(2)").text();
+                proyecto.asesores.push({nombreAsesor: nombreAsesor, rol: rol});
+            });
+            
+            // Envía el objeto al script de guardado en la base de datos
+            $.post("../insert/agregarProyecto.php", proyecto, function(data) {
+                alert(data);
+            });
         });
+    });
     }
     </script>
 
-
-    
