@@ -7,6 +7,8 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+
+            <form id="formulario-proyecto">
             <div class="modal-body">
                 <!-- NOMBRE DEL PROYECTO -->
                 <div class="form-group">
@@ -84,6 +86,8 @@
                 </div>
                 <!-- FIN MONTO -->
             </div>
+            </form>
+            
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
               
