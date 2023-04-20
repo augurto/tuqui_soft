@@ -32,11 +32,11 @@
                     <select class="form-control select2" id="nombre_universidad" style="width: 100%;">
                         <?php
                          // consulta a la tabla universidad
-                            $consulta_universidades = "SELECT id, CONCAT(abreviatura, ' - ', departamento, ' - ', nombre) as nombre FROM universidad";
+                            $consulta_universidades = "SELECT * FROM universidades";
                             $resultado_universidades = mysqli_query($conexion, $consulta_universidades);
 
                         while ($fila = mysqli_fetch_array($resultado_universidades)) { ?>
-                            <option value="<?php echo $fila['id']; ?>"><?php echo $fila['nombre']; ?></option>
+                            <option value="<?php echo $fila['id']; ?>"><?php echo $fila['departamento'].' - '.$fila['abreviatura'].' - '.$fila['nombre']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
