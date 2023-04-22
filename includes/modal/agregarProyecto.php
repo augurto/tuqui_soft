@@ -7,7 +7,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-
+        <form method="POST" action="../insert/agregarProyecto.php">
             <div class="modal-body">
                 <!-- NOMBRE DEL PROYECTO -->
                 <div class="form-group">
@@ -122,9 +122,10 @@
               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
               
               <button type="button" class="btn btn-primary" onclick="guardarProyecto()">Guardar</button>
+              
 
 
-
+        </form>                        
             </div>
           </div>
           <!-- /.modal-content -->
@@ -194,44 +195,36 @@
     
     <script>
     function guardarProyecto() {
-        $(document).ready(function() {
-        // Cuando se envía el formulario
-        $("#formulario-proyecto").submit(function(event) {
-            // Evita que se envíe el formulario por defecto
-            event.preventDefault();
-            
-            // Captura los valores de los campos
-            var nombreProyecto = $("#nombre-proyecto").val();
-            var idCliente = $("#nombre_cliente").val();
-            var idUniversidad = $("#nombre_universidad").val();
-            var idTipoProyecto = $("#tipo_proyecto").val();
-            var fechaEntrega = $("#reservation").val();
-            var monto = $("#monto").val();
-            
-            // Crea un objeto con los valores capturados
-            var proyecto = {
-                nombreProyecto: nombreProyecto,
-                idCliente: idCliente,
-                idUniversidad: idUniversidad,
-                idTipoProyecto: idTipoProyecto,
-                fechaEntrega: fechaEntrega,
-                monto: monto,
-                asesores: []
-            };
-            
-            // Captura los valores de los asesores asignados al proyecto
-            $("#tabla-asesores tbody tr").each(function() {
-                var nombreAsesor = $(this).find("td:nth-child(1)").text();
-                var rol = $(this).find("td:nth-child(2)").text();
-                proyecto.asesores.push({nombreAsesor: nombreAsesor, rol: rol});
-            });
-            
-            // Envía el objeto al script de guardado en la base de datos
-            $.post("../insert/agregarProyecto.php", proyecto, function(data) {
-                alert(data);
-            });
-        });
-    });
+        // Obtener valores de los campos del formulario
+        const nombreProyecto = document.querySelector('#nombre-proyecto').value;
+        const idCliente = document.querySelector('#nombre_cliente').value;
+        const idUniversidad = document.querySelector('#nombre_universidad').value;
+        const idTipoProyecto = document.querySelector('#tipo_proyecto').value;
+        const fechaEntrega = document.querySelector('#reservation').value;
+        const monto = document.querySelector('#monto').value;
+        const asesores = [];
+        const tablaAsesores = document.querySelector('#tabla-asesores tbody');
+        for (let i = 0; i < tablaAsesores.children.length; i++) {
+            const nombre = tablaAsesores.children[i].children[0].textContent;
+            const rol = tablaAsesores.children[i].children[1].textContent;
+            asesores.push({ nombre, rol });
+        }
+
+        // Crear objeto FormData con los valores del formulario
+        const formData = new FormData();
+        formData.append('nombreProyecto', nombreProyecto);
+        formData.append('idCliente', idCliente);
+        formData.append('idUniversidad', idUniversidad);
+        formData.append('idTipoProyecto', idTipoProyecto);
+        formData.append('fechaEntrega', fechaEntrega);
+        formData.append('monto', monto);
+        formData.append('asesores', JSON.stringify(asesores));
+
+        // Enviar petición AJAX
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '../insert/agregarProyecto.php');
+        xhr.send(formData);
     }
+
     </script>
 

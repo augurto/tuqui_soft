@@ -1,26 +1,53 @@
 <?php
-  include('../conexion.php');
+// Conexión a la base de datos
+$servername = "localhost";
+$username = "u415020159_juanjo";
+$password = "21.17.Juanjo";
+$dbname = "u415020159_jj";
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if (!$conn) {
+    die("Conexión fallida: " . mysqli_connect_error());
+}
 
-        // Obtener los valores ingresados por el usuario
-        $nombreProyecto = $_POST['nombre-proyecto'];
-        $idCliente = $_POST['nombre_cliente'];
-        $idUniversidad = $_POST['nombre_universidad'];
-        $idTipoProyecto = $_POST['tipo_proyecto'];
-        $asesores = $_POST['asesores']; // este valor es un array con los id de los asesores seleccionados
-        $fechaEntrega = $_POST['reservation'];
-        $monto = $_POST['monto'];
+// Si se ha enviado el formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Recogemos los valores del formulario
+    $nombre_proyecto = $_POST["nombre_proyecto"];
+    $id_cliente = $_POST["nombre_cliente"];
+    $id_universidad = $_POST["nombre_universidad"];
+    $id_tipo_proyecto = $_POST["tipo_proyecto"];
+    $fecha_entrega = $_POST["fecha_entrega"];
+    $monto = $_POST["monto"];
+    $asesores = $_POST["asesores"];
 
-        // Insertar los valores en la tabla proyectos
-        $query = "INSERT INTO proyectos (nombre_proyecto, id_cliente, id_universidad, id_tipo_proyecto, fecha_entrega, monto) VALUES ('$nombreProyecto', $idCliente, $idUniversidad, $idTipoProyecto, '$fechaEntrega', $monto)";
-        mysqli_query($conn, $query);
+    // Preparamos la consulta para insertar el proyecto
+    $sql = "INSERT INTO proyectos (nombre_proyecto, id_cliente, id_universidad, id_tipo_proyecto, fecha_entrega, monto) VALUES ('$nombre_proyecto', '$id_cliente', '$id_universidad', '$id_tipo_proyecto', '$fecha_entrega', '$monto')";
 
-        // Obtener el id del proyecto recién insertado
-        $idProyecto = mysqli_insert_id($conn);
+    // Ejecutamos la consulta
+    if (mysqli_query($conn, $sql)) {
+        // Si se ha insertado correctamente el proyecto, recogemos su ID
+        $id_proyecto = mysqli_insert_id($conn);
 
-        // Insertar los valores en la tabla asesor_proyecto para cada asesor seleccionado
-        foreach ($asesores as $idAsesor) {
-            $rol = $_POST['rol-' . $idAsesor];
-            $query = "INSERT INTO asesor_proyecto (id_proyecto, id_asesor, rol) VALUES ($idProyecto, $idAsesor, '$rol')";
-            mysqli_query($conn, $query);
+        // Preparamos la consulta para insertar los asesores del proyecto
+        $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES ";
+        foreach ($asesores as $asesor) {
+            $id_usuario = $asesor["id_usuario"];
+            $rol = $asesor["rol"];
+            $sql_asesores .= "('$id_proyecto', '$id_usuario', '$rol'),";
         }
+        $sql_asesores = rtrim($sql_asesores, ","); // Quitamos la última coma
+
+        // Ejecutamos la consulta
+        if (mysqli_query($conn, $sql_asesores)) {
+            echo "Proyecto guardado correctamente.";
+        } else {
+            echo "Error al guardar los asesores del proyecto: " . mysqli_error($conn);
+        }
+    } else {
+        echo "Error al guardar el proyecto: " . mysqli_error($conn);
+    }
+
+    // Cerramos la conexión a la base de datos
+    mysqli_close($conn);
+}
 ?>
