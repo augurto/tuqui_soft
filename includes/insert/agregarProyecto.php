@@ -12,11 +12,11 @@ if (!$conn) {
 // Si se ha enviado el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recogemos los valores del formulario
-    $nombre_proyecto = $_POST["nombre_proyecto"];
-    $id_cliente = $_POST["nombre_cliente"];
-    $id_universidad = $_POST["nombre_universidad"];
-    $id_tipo_proyecto = $_POST["tipo_proyecto"];
-    $fecha_entrega = $_POST["fecha_entrega"];
+    $nombre_proyecto = $_POST["nombreProyecto"];
+    $id_cliente = $_POST["idCliente"];
+    $id_universidad = $_POST["idUniversidad"];
+    $id_tipo_proyecto = $_POST["idTipoProyecto"];
+    $fecha_entrega = $_POST["fechaEntrega"];
     $monto = $_POST["monto"];
     $asesores = $_POST["asesores"];
 
