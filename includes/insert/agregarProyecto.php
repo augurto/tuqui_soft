@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES ";
         foreach ($asesores as $asesor) {
             $id_usuario = $asesor['nombre'];
-            $rol = $asesor['rol'];
+            $rol = $asesor['rol'];  
             $sql_asesores .= "('$mi_variable', '$id_usuario', '$rol'),";
         }
         $sql_asesores = rtrim($sql_asesores, ","); // Quitamos la última coma
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Imprimimos la consulta para debuggear
             echo "SQL Asesores: " . $sql_asesores . "<br>";
 
-            echo "Error al guardar los asesores del proyecto: ".$mi_variable.'-'.$id_usuario.'-'.$rol. mysqli_error($conn);
+            echo "Error al guardar los asesores del proyecto: ".$mi_variable. mysqli_error($conn);
         }
     } else {
         echo "Error al guardar el proyecto: " . mysqli_error($conn);
