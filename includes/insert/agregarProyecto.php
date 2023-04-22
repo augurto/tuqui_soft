@@ -46,6 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_query($conn, $sql_asesores)) {
             echo "Proyecto guardado correctamente.";
         } else {
+          // Imprimimos la consulta para debuggear
+            echo "SQL Asesores: " . $sql_asesores . "<br>";
+
             echo "Error al guardar los asesores del proyecto: " . mysqli_error($conn);
         }
     } else {
