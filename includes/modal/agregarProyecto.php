@@ -7,7 +7,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-        <form method="POST" action="../insert/agregarProyecto.php">
+       
             <div class="modal-body">
                 <!-- NOMBRE DEL PROYECTO -->
                 <div class="form-group">
@@ -124,8 +124,7 @@
               <button type="button" class="btn btn-primary" onclick="guardarProyecto()">Guardar</button>
               
 
-
-        </form>                        
+                  
             </div>
           </div>
           <!-- /.modal-content -->
