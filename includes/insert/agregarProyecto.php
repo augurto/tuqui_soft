@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($asesores as $asesor) {
             $id_usuario = $asesor['nombre'];
             $rol = $asesor['rol'];  
-            $sql_asesores .= "('$mi_variable', '$id_usuario', '$rol'),";
+            $sql_asesores .= "('".$mi_variable."', '".$id_usuario."', '".$rol."'),";
         }
         $sql_asesores = rtrim($sql_asesores, ","); // Quitamos la última coma
 
@@ -58,4 +58,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Cerramos la conexión a la base de datos
     mysqli_close($conn);
 }
+// Guardar los datos de los productos vendidos en la tabla "productos_venta"
+/* foreach ($asesores as $asesor) {
+  $sql = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES 
+  ('".$mi_variable."','".$asesor['nombre']."', '".$asesor['rol']."')";
+  if ($conexion->query($sql) === FALSE) {
+    die('eror en  "productos_venta": ' . $conexion->error);
+  }
+} */
 ?>
