@@ -28,10 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_query($conn, $sql)) {
         // Si se ha insertado correctamente el proyecto, recogemos su ID
     
-        // Si se ha insertado correctamente el proyecto, recogemos su ID
         $id_proyecto = mysqli_insert_id($conn);
         // Almacenamos el ID del proyecto en una variable
         $mi_variable = $id_proyecto;
+        // Si se ha capturado la variable (comprobado)
 
         // Preparamos la consulta para insertar los asesores del proyecto
         $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES ";
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Imprimimos la consulta para debuggear
             echo "SQL Asesores: " . $sql_asesores . "<br>";
 
-            echo "Error al guardar los asesores del proyecto: ".$mi_variable. mysqli_error($conn);
+            echo "Error al guardar los asesores del proyecto: ".$mi_variable.'-'.$id_usuario.'-'.$rol. mysqli_error($conn);
         }
     } else {
         echo "Error al guardar el proyecto: " . mysqli_error($conn);
