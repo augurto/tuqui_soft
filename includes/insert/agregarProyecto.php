@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Imprimimos la consulta para debuggear
             echo "SQL Asesores: " . $sql_asesores . "<br>";
 
-            echo "Error al guardar los asesores del proyecto: " . mysqli_error($conn);
+            echo "Error al guardar los asesores del proyecto: ".$mi_variable. mysqli_error($conn);
         }
     } else {
         echo "Error al guardar el proyecto: " . mysqli_error($conn);
