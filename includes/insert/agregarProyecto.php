@@ -27,7 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ejecutamos la consulta
     if (mysqli_query($conn, $sql)) {
         // Si se ha insertado correctamente el proyecto, recogemos su ID
-        $id_proyecto = mysqli_insert_id($conn);
+       
+        $id_proyecto = $conn->insert_id; 
 
         // Preparamos la consulta para insertar los asesores del proyecto
         $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES ";
