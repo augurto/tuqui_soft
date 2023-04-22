@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Preparamos la consulta para insertar los asesores del proyecto
         $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES ";
         foreach ($asesores as $asesor) {
-            $id_usuario = $asesor["id_usuario"];
+            $id_usuario = $asesor["nombre"];
             $rol = $asesor["rol"];
             $sql_asesores .= "('$id_proyecto', '$id_usuario', '$rol'),";
         }
