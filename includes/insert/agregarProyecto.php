@@ -22,7 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
 
     // Preparamos la consulta para insertar el proyecto
-    $sql = "INSERT INTO proyectos (nombre_proyecto, id_cliente, id_universidad, id_tipo_proyecto, fecha_entrega, monto) VALUES ('$nombre_proyecto', '$id_cliente', '$id_universidad', '$id_tipo_proyecto', '$fecha_entrega', '$monto')";
+    $sql = "INSERT INTO proyectos (nombre_proyecto, id_cliente, id_universidad, id_tipo_proyecto, fecha_entrega, monto, fecha_creacion) 
+    VALUES ('$nombre_proyecto', '$id_cliente', '$id_universidad', '$id_tipo_proyecto', '$fecha_entrega', '$monto', NOW())";
 
     // Ejecutamos la consulta
     if (mysqli_query($conn, $sql)) {
@@ -36,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($asesores as $asesor) {
           $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES 
           ('".$mi_variable."','".$asesor['nombre']."', '".$asesor['rol']."')";
-          if ($conexion->query($sql) === FALSE) {
-            die('eror en  "productos_venta": ' . $conexion->error);
+          if (mysqli_query($conn, $sql_asesores) === FALSE) {
+            die('error en "asesores_proyecto": ' . mysqli_error($conn));
           }
         }
        
