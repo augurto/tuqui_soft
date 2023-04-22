@@ -221,7 +221,7 @@
 
         // Enviar petición AJAX
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '../insert/agregarProyecto.php');
+        xhr.open('POST', '../includes/insert/agregarProyecto.php');
         xhr.send(formData);
     }
 
