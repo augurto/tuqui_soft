@@ -33,24 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mi_variable = $id_proyecto;
         // Si se ha capturado la variable (comprobado)
 
-        // Preparamos la consulta para insertar los asesores del proyecto
-        $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES ";
         foreach ($asesores as $asesor) {
-            $id_usuario = $asesor['nombre'];
-            $rol = $asesor['rol'];  
-            $sql_asesores .= "('".$mi_variable."', '".$id_usuario."', '".$rol."'),";
+          $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES 
+          ('".$mi_variable."','".$asesor['nombre']."', '".$asesor['rol']."')";
+          if ($conexion->query($sql) === FALSE) {
+            die('eror en  "productos_venta": ' . $conexion->error);
+          }
         }
-        $sql_asesores = rtrim($sql_asesores, ","); // Quitamos la última coma
-
-        // Ejecutamos la consulta
-        if (mysqli_query($conn, $sql_asesores)) {
-            echo "Proyecto guardado correctamente.";
-        } else {
-          // Imprimimos la consulta para debuggear
-            echo "SQL Asesores: " . $sql_asesores . "<br>";
-
-            echo "Error al guardar los asesores del proyecto: ".$mi_variable. mysqli_error($conn);
-        }
+       
     } else {
         echo "Error al guardar el proyecto: " . mysqli_error($conn);
     }
@@ -58,12 +48,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Cerramos la conexión a la base de datos
     mysqli_close($conn);
 }
-// Guardar los datos de los productos vendidos en la tabla "productos_venta"
-/* foreach ($asesores as $asesor) {
-  $sql = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES 
-  ('".$mi_variable."','".$asesor['nombre']."', '".$asesor['rol']."')";
-  if ($conexion->query($sql) === FALSE) {
-    die('eror en  "productos_venta": ' . $conexion->error);
-  }
-} */
+
 ?>
