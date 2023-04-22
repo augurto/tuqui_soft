@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha_entrega = $_POST["fechaEntrega"];
     $monto = $_POST["monto"];
     $asesores = $_POST["asesores"];
+    
 
     // Preparamos la consulta para insertar el proyecto
     $sql = "INSERT INTO proyectos (nombre_proyecto, id_cliente, id_universidad, id_tipo_proyecto, fecha_entrega, monto) VALUES ('$nombre_proyecto', '$id_cliente', '$id_universidad', '$id_tipo_proyecto', '$fecha_entrega', '$monto')";
@@ -31,8 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Preparamos la consulta para insertar los asesores del proyecto
         $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES ";
         foreach ($asesores as $asesor) {
-            $id_usuario = $asesor["nombre"];
-            $rol = $asesor["rol"];
+            $id_usuario = $asesor['nombre'];
+            $rol = $asesor['rol'];
             $sql_asesores .= "('$id_proyecto', '$id_usuario', '$rol'),";
         }
         $sql_asesores = rtrim($sql_asesores, ","); // Quitamos la última coma
