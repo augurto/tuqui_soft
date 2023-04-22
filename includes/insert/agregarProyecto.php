@@ -34,11 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Si se ha capturado la variable (comprobado)
 
         // Preparamos la consulta para insertar los asesores del proyecto
-        $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol) VALUES ";
+        $sql_asesores = "INSERT INTO asesores_proyecto (id_proyecto, id_usuario, rol,fecha_creacion) VALUES ";
         foreach ($asesores as $asesor) {
             $id_usuario = $asesor['nombre'];
             $rol = $asesor['rol'];
-            $sql_asesores .= "('$mi_variable', '$id_usuario', '$rol'),";
+            $fecha_creacion = date('Y-m-d H:i:s');
+            $sql_asesores .= "('$mi_variable', '$id_usuario', '$rol', '$fecha_creacion'),";
         }
         $sql_asesores = rtrim($sql_asesores, ","); // Quitamos la última coma
 
